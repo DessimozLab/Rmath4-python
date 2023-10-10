@@ -4,7 +4,7 @@ setup(
     py_modules=['Rmath'],
     ext_modules=[Extension('_Rmath',
         language='c',
-        define_macros=[('MATHLIB_STANDALONE', None)],
+        define_macros=[('MATHLIB_STANDALONE', None), ('NOWARNINGMESSAGES', None)],
         include_dirs=['include'],
         sources=[
             'src/standalone/sunif.c',
@@ -93,6 +93,7 @@ setup(
             'src/qlogis.c',
             'src/qnbeta.c',
             'src/qnbinom.c',
+            'src/qnbinom_mu.c',
             'src/qnchisq.c',
             'src/qnf.c',
             'src/qnorm.c',

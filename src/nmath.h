@@ -103,12 +103,26 @@ void R_CheckUserInterrupt(void);
 #include <stdio.h>
 #include <stdlib.h> /* for exit */
 #define MATHLIB_ERROR(fmt,x)	{ fprintf(stderr,fmt,x); exit(1); }
+
+#ifndef NOWARNINGMESSAGES
+/* display warning messages */
 #define MATHLIB_WARNING(fmt,x)		fprintf(stderr,fmt,x)
 #define MATHLIB_WARNING2(fmt,x,x2)	fprintf(stderr,fmt,x,x2)
 #define MATHLIB_WARNING3(fmt,x,x2,x3)	fprintf(stderr,fmt,x,x2,x3)
 #define MATHLIB_WARNING4(fmt,x,x2,x3,x4) fprintf(stderr,fmt,x,x2,x3,x4)
 #define MATHLIB_WARNING5(fmt,x,x2,x3,x4,x5) fprintf(stderr,fmt,x,x2,x3,x4,x5)
 #define MATHLIB_WARNING6(fmt,x,x2,x3,x4,x5,x6) fprintf(stderr,fmt,x,x2,x3,x4,x5,x6)
+
+#else
+/* hide warning messages */
+#define MATHLIB_WARNING(fmt,x)
+#define MATHLIB_WARNING2(fmt,x,x2)
+#define MATHLIB_WARNING3(fmt,x,x2,x3)
+#define MATHLIB_WARNING4(fmt,x,x2,x3,x4)
+#define MATHLIB_WARNING5(fmt,x,x2,x3,x4,x5)
+#define MATHLIB_WARNING6(fmt,x,x2,x3,x4,x5,x6)
+
+#endif
 
 #define ISNAN(x) (isnan(x)!=0)
 // Arith.h defines it

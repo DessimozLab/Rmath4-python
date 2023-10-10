@@ -10,7 +10,11 @@ MODULE = sys.modules[__name__]
 
 def MATHIMPORT(restype, name, *argtypes):
     name, symbol = name if isinstance(name, tuple) else (name, name)
-    func = getattr(MATHLIB, symbol)
+    try:
+        func = getattr(MATHLIB, symbol)
+    except:
+        print(dir(MATHLIB))
+        raise
     func.__name__ = name
     func.argtypes = argtypes
     func.restype = restype
@@ -138,7 +142,7 @@ MATHIMPORT(c_double, 'rnbinom', c_double, c_double)
 
 MATHIMPORT(c_double, 'dnbinom_mu', c_double, c_double, c_double, c_int)
 MATHIMPORT(c_double, 'pnbinom_mu', c_double, c_double, c_double, c_int, c_int)
-MATHIMPORT(c_double, 'qnbinom_mu', c_double, c_double, c_double, c_int, c_int)
+#MATHIMPORT(c_double, 'qnbinom_mu', c_double, c_double, c_double, c_int, c_int)
 MATHIMPORT(c_double, 'rnbinom_mu', c_double, c_double)
 
 # Poisson Distribution

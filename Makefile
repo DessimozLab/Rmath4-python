@@ -13,8 +13,7 @@ update: R-$(RVERSION).tar.gz
 	find include/R_ext -name '*.h' | xargs -I {} tar -xzvf $< --strip-components 2 '*/src/{}'
 	tar -xzvf $< --strip-components 2 '*/src/include/Rmath.h0.in'
 	mv -f include/Rmath.h0.in include/Rmath.h
-	python fix_nmath.py src/nmath.h > src/nmath.h.tmp
-	mv src/nmath.h.tmp src/nmath.h
+	patch src/nmath.h nmath.h.patch  # possibly only for 4.2.1
 
 R-$(RVERSION).tar.gz:
 	curl -OL https://cran.r-project.org/src/base/R-4/$@
