@@ -5,6 +5,21 @@
    ancillary routines, without investigating the error analysis as we
    do need very high relative accuracy.  This version has about
    14 digits accuracy.
+
+   More specifically,  Brown & Levy (1994) "Certification of Algorithm 708" write
+   "
+    The number of significant digits of accuracy [..] was calculated [..] as
+
+                       - log10 (2 RelativeError),
+    [....]
+    Accuracy ranged from 9.64 significant digits to 15.65 with a
+    median of 14.65 and a lower quartile of 13.81.
+    [...]
+    ... overall accuracy increases slightly as a/b moves away from 1.
+        Linear regression indicates that
+    (1) an average of 13.71 significant digits are obtained in cases in which a = b and
+    (2) the number increases 0.14 significant digits for each unit change in log10(a/b).
+   "
 */
 
 #undef min
@@ -736,7 +751,7 @@ static double bfrac(double a, double b, double x, double y, double lambda,
     brc = brcomp(a, b, x, y, log_p);
     if(ISNAN(brc)) { // e.g. from   L <- 1e308; pnbinom(L, L, mu = 5)
 	R_ifDEBUG_printf(" --> brcomp(a,b,x,y) = NaN\n");
-	ML_ERR_return_NAN; // TODO: could we know better?
+	ML_WARN_return_NAN; // TODO: could we know better?
     }
     if (!log_p && brc == 0.) {
 	R_ifDEBUG_printf(" --> brcomp(a,b,x,y) underflowed to 0.\n");

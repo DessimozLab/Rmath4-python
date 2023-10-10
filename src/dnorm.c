@@ -37,13 +37,11 @@ double dnorm4(double x, double mu, double sigma, int give_log)
     if (ISNAN(x) || ISNAN(mu) || ISNAN(sigma))
 	return x + mu + sigma;
 #endif
+    if (sigma < 0) ML_WARN_return_NAN;
     if(!R_FINITE(sigma)) return R_D__0;
     if(!R_FINITE(x) && mu == x) return ML_NAN;/* x-mu is NaN */
-    if (sigma <= 0) {
-	if (sigma < 0) ML_ERR_return_NAN;
-	/* sigma == 0 */
+    if (sigma == 0) 
 	return (x == mu) ? ML_POSINF : R_D__0;
-    }
     x = (x - mu) / sigma;
 
     if(!R_FINITE(x)) return R_D__0;
@@ -64,7 +62,7 @@ double dnorm4(double x, double mu, double sigma, int give_log)
 
      * x*x  may lose upto about two digits accuracy for "large" x
      * Morten Welinder's proposal for PR#15620
-     * https://bugs.r-project.org/bugzilla/show_bug.cgi?id=15620
+     * https://bugs.r-project.org/show_bug.cgi?id=15620
 
      * -- 1 --  No hoop jumping when we underflow to zero anyway:
 
@@ -79,7 +77,7 @@ double dnorm4(double x, double mu, double sigma, int give_log)
      */
     if (x > sqrt(-2*M_LN2*(DBL_MIN_EXP + 1-DBL_MANT_DIG))) return 0.;
 
-    /* Now, to get full accurary, split x into two parts,
+    /* Now, to get full accuracy, split x into two parts,
      *  x = x1+x2, such that |x2| <= 2^-16.
      * Assuming that we are using IEEE doubles, that means that
      * x1*x1 is error free for x<1024 (but we have x < 38.6 anyway).
