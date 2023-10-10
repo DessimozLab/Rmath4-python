@@ -1,7 +1,7 @@
 from setuptools import setup, Extension
 
 setup(
-    py_modules=['Rmath'],
+    py_modules=['Rmath4'],
     ext_modules=[Extension('_Rmath',
         language='c',
         define_macros=[('MATHLIB_STANDALONE', None), ('NOWARNINGMESSAGES', None)],
