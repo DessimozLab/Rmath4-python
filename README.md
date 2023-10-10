@@ -1,10 +1,7 @@
 Rmath4-python
 ============
 
-This is the [standalone Rmath library from R][Rmath] for Python. It is based on
-the [Rmath-julia] library but does not alter the random number generation.
-
-This is an updated version, including some patches for warning messages, based on (Nick Tessore's work)[https://github.com/ntessore/Rmath-python].
+This is a standalone Rmath library based on R version 4 for Python. It is based on the Rmath-julia and original Rmath-python package from Nick Tessore (https://github.com/ntessore/Rmath-python).
 
 
 Installation
@@ -31,3 +28,4 @@ should go in `include/Rconfig.h`. Additional manual updates for the `nmath.h` pa
 
 [Rmath]: https://cran.r-project.org/doc/manuals/r-release/R-admin.html#The-standalone-Rmath-library
 [Rmath-julia]: https://github.com/JuliaStats/Rmath-julia
+[Rmath-python]: https://github.com/ntessore/Rmath-python
