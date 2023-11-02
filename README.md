@@ -3,6 +3,8 @@ Rmath4-python
 
 This is a standalone Rmath library based on R version 4 for Python. It is based on the Rmath-julia and original Rmath-python package from Nick Tessore (https://github.com/ntessore/Rmath-python).
 
+This package was created in order to call statistical functions in numba generated code in non-python mode. 
+
 
 Installation
 ------------
