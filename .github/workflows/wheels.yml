@@ -73,6 +73,9 @@ jobs:
       - name: Build ${{ matrix.build }} wheels
         run: |
           python -m cibuildwheel --output-dir wheelhouse
+        env:
+          CIBW_TEST_REQUIRES: pytest
+          CIBW_TEST_COMMAND: pytest {package}/tests
 
       - uses: actions/upload-artifact@0b2256b8c012f0828dc542b3febcab082c67f72b # v4.3.4
         with:
@@ -111,6 +114,6 @@ jobs:
 
       - name: Check sdist and wheels
         run: |
-          python -m twine check *.whl -*.tar.gz
+          python -m twine check *.whl *.tar.gz
         working-directory: wheelhouse
 
